@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inclusive Training Practices Diagnostic — InclusionEdge</title>
+<meta name="description" content="A course-level self-check for Singapore CET providers. Fifteen questions, about seven minutes. Nothing is sent anywhere.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#102B3C; --ink-soft:#40596B; --ink-faint:#6B8494;
+    --teal:#0F7B78; --teal-deep:#0A5654; --teal-wash:#E4F0EF;
+    --amber:#C9862B; --amber-text:#8A5A12; --amber-wash:#FBF2E2;
+    --rust:#B4552D;
+    --bg:#EFF4F4; --card:#FFFFFF; --line:#C9DADA;
+    --sans:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;
+    --serif:'Source Serif 4',Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:var(--sans);font-size:16px;line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px 80px}
+
+  /* ---------- header ---------- */
+  header.site{display:flex;align-items:center;gap:12px;padding:26px 0 18px;border-bottom:1px solid var(--line)}
+  .brand{font-weight:800;letter-spacing:.01em;font-size:16px;line-height:1.2}
+  .brand span{color:var(--teal)}
+  .brand small{display:block;font-weight:500;font-size:12px;color:var(--ink-soft);letter-spacing:.03em}
+
+  /* ---------- type ---------- */
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(28px,5.2vw,40px);line-height:1.16;margin:16px 0 16px}
+  h2{font-family:var(--serif);font-weight:600;font-size:clamp(21px,3.6vw,26px);line-height:1.3;margin:0 0 14px}
+  .eyebrow{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-deep)}
+  .lede{font-family:var(--serif);font-size:17.5px;line-height:1.58;color:var(--ink-soft);max-width:58ch;margin:0 0 14px}
+  .note{font-size:13.5px;color:var(--ink-faint);line-height:1.5}
+
+  /* ---------- buttons ---------- */
+  .btn{
+    font-family:var(--sans);font-weight:700;font-size:15px;letter-spacing:.01em;
+    background:var(--ink);color:#fff;border:2px solid var(--ink);border-radius:6px;
+    padding:13px 24px;cursor:pointer;transition:background .15s,border-color .15s;
+  }
+  .btn:hover{background:var(--teal-deep);border-color:var(--teal-deep)}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn.ghost:hover{background:#fff;border-color:var(--teal);color:var(--teal-deep)}
+  .btn[disabled]{opacity:.4;cursor:not-allowed}
+  .btn:focus-visible,a:focus-visible,input:focus-visible,.opt:focus-within{
+    outline:3px solid var(--teal);outline-offset:2px;
+  }
+  .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+
+  /* ---------- progress ---------- */
+  .prog{margin:24px 0 6px}
+  .track{height:5px;background:var(--line);border-radius:3px;overflow:hidden}
+  .track > i{display:block;height:100%;background:var(--teal);width:0;transition:width .35s ease}
+  .progmeta{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-soft);margin-top:8px}
+  .progmeta b{color:var(--teal-deep);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:11px}
+
+  /* ---------- questions ---------- */
+  fieldset{border:0;padding:0;margin:0}
+  legend{font-family:var(--serif);font-size:clamp(20px,3.4vw,25px);font-weight:600;line-height:1.34;margin:18px 0 20px;padding:0}
+  .opt{display:block;margin-bottom:10px}
+  .opt input{position:absolute;opacity:0;width:1px;height:1px}
+  .opt span{
+    display:block;background:var(--card);border:1.5px solid var(--line);border-radius:8px;
+    padding:15px 17px 15px 46px;position:relative;cursor:pointer;font-size:15.5px;line-height:1.45;
+    transition:border-color .15s,background .15s;
+  }
+  .opt span::before{
+    content:"";position:absolute;left:16px;top:50%;transform:translateY(-50%);
+    width:17px;height:17px;border-radius:50%;border:2px solid var(--ink-faint);background:#fff;
+  }
+  .opt span:hover{border-color:var(--teal)}
+  .opt input:checked + span{border-color:var(--teal);background:var(--teal-wash)}
+  .opt input:checked + span::before{border-color:var(--teal-deep);background:var(--teal-deep);box-shadow:inset 0 0 0 3px #fff}
+  .opt.dk span{color:var(--ink-soft)}
+
+  .field{margin-bottom:18px}
+  .field label{display:block;font-weight:600;font-size:14px;margin-bottom:6px}
+  .field input{
+    width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:6px;
+    font-family:var(--sans);font-size:15px;background:#fff;color:var(--ink);
+  }
+
+  /* ---------- results ---------- */
+  .stagecard{background:var(--ink);color:#EAF3F3;border-radius:12px;padding:30px 28px;margin:22px 0 10px}
+  .stagecard .eyebrow{color:#79C4C0}
+  .stagename{font-size:clamp(30px,6vw,44px);font-weight:800;letter-spacing:-.015em;margin:8px 0 12px;line-height:1.05}
+  .stagecard p{font-family:var(--serif);font-size:17px;line-height:1.6;color:#C6D8D8;margin:0}
+
+  .counts{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0 8px}
+  .count{flex:1 1 200px;background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:18px 20px}
+  .count b{display:block;font-size:34px;font-weight:800;line-height:1;color:var(--teal-deep)}
+  .count.warn b{color:var(--amber-text)}
+  .count span{display:block;font-size:13.5px;color:var(--ink-soft);margin-top:8px;line-height:1.45}
+
+  .demand{background:var(--card);border:1.5px solid var(--line);border-left:5px solid var(--amber);border-radius:10px;padding:20px 22px;margin-top:14px}
+  .demand h3{margin:0 0 8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-text)}
+  .demand .d-title{font-family:var(--serif);font-size:17.5px;font-weight:600;line-height:1.45;margin:0 0 12px}
+  .demand .d-do{font-size:14.5px;line-height:1.55;margin:0 0 10px}
+  .demand .d-do b{color:var(--teal-deep)}
+  .demand .d-div{font-size:13.5px;line-height:1.5;color:var(--teal-deep);background:var(--teal-wash);border-radius:6px;padding:10px 12px;margin:0}
+
+  .lens{background:var(--amber-wash);border:1.5px solid #E7CF9E;border-radius:10px;padding:20px 22px;margin:26px 0 0}
+  .lens p{margin:0;font-family:var(--serif);font-size:16.5px;line-height:1.55}
+
+  .cta{background:var(--teal-deep);color:#E6F4F3;border-radius:12px;padding:28px 26px;margin-top:34px}
+  .cta h2{color:#fff;margin-bottom:10px}
+  .cta p{font-size:14.5px;line-height:1.6;color:#B7D8D6;margin:0 0 18px}
+  .cta .row{display:flex;gap:10px;flex-wrap:wrap}
+  .cta input{flex:1 1 220px;padding:13px 14px;border-radius:6px;border:1.5px solid #2E7C79;background:#0E6663;color:#fff;font-family:var(--sans);font-size:15px}
+  .cta input::placeholder{color:#8FC5C2}
+  .cta .btn{background:#fff;color:var(--teal-deep);border-color:#fff}
+  .cta .btn:hover{background:var(--teal-wash);border-color:var(--teal-wash);color:var(--teal-deep)}
+
+  .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .hidden{display:none}
+  .fade{animation:f .3s ease}
+  @keyframes f{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  footer.site{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-faint)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="site">
+    <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true" focusable="false">
+      <rect x="5" y="4" width="24" height="26" fill="none" stroke="#102B3C" stroke-width="2.4"/>
+      <path d="M17 4 L27 8 L27 30 L17 30 Z" fill="#0F7B78"/>
+    </svg>
+    <div class="brand">Inclusion<span>Edge</span>
+      <small>Where intent meets lived reality</small>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ================= INTRO ================= -->
+    <section id="s-intro" class="fade">
+      <div style="padding-top:30px">
+        <p class="eyebrow">Inclusive Training Practices Diagnostic</p>
+        <h1>Every course asks something of its learners. Most of the time, nobody has written down what.</h1>
+        <p class="lede">Fifteen questions about one course you run. Not about you, not about your organisation — about the course, and what it quietly requires of the people taking it.</p>
+        <p class="lede">There is no score, no pass, no grade. Some of what a course asks is the skill you certify, and that stays. The rest is just how the course happens to run — and that is where most learners are lost, without anyone deciding it.</p>
+        <p class="note"><strong>About 7 minutes. Nothing is sent anywhere.</strong> Your answers stay in your browser, and you download your own report at the end.</p>
+
+        <div class="field" style="margin-top:26px;max-width:420px">
+          <label for="course">Which course are you thinking of?</label>
+          <input id="course" type="text" placeholder="e.g. WSQ Service Excellence, 2-day classroom" autocomplete="off">
+        </div>
+
+        <div class="btnrow">
+          <button class="btn" id="start">Start the self-check</button>
+        </div>
+        <p class="note" style="margin-top:14px">Answer for how the course <em>actually</em> runs, not how it is written up. “Don’t know” is a real answer and is counted as one.</p>
+      </div>
+    </section>
+
+    <!-- ================= QUIZ ================= -->
+    <section id="s-quiz" class="hidden">
+      <div class="prog">
+        <div class="track"><i id="bar"></i></div>
+        <div class="progmeta">
+          <b id="domain">Sensory</b>
+          <span id="counter">1 of 15</span>
+        </div>
+      </div>
+
+      <div id="qbox" aria-live="polite"></div>
+
+      <div class="btnrow">
+        <button class="btn ghost" id="back">← Back</button>
+        <button class="btn" id="next" disabled>Next →</button>
+      </div>
+    </section>
+
+    <!-- ================= CONTEXT ================= -->
+    <section id="s-context" class="hidden">
+      <p class="eyebrow">Nearly there</p>
+      <h2>Three quick ones, so the recommendations fit your situation.</h2>
+      <div id="cbox"></div>
+      <div class="btnrow">
+        <button class="btn" id="toresults">See my results</button>
+      </div>
+    </section>
+
+    <!-- ================= RESULTS ================= -->
+    <section id="s-results" class="hidden">
+      <div id="results"></div>
+    </section>
+
+  </main>
+
+  <footer class="site">
+    InclusionEdge · Inclusive Training Practices Diagnostic · Self-check tool. Not an audit, not an accreditation, not a grade.
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------- data ---------------- */
+  const DOMAINS = {
+    sen:"Sensory", com:"Communication and language", cog:"Cognitive and learning",
+    dig:"Digital", phy:"Physical and motor", soc:"Social and interactional",
+    env:"Environmental and logistical"
+  };
+
+  // score: 3 designed / 2 depends / 1 fixed / null don't know
+  const Q = [
+    { d:"sen", q:"Your slides, demos and diagrams — is the same information also said out loud, or given in writing?",
+      o:[["Yes, always. Trainers describe what is on screen, and notes go out.",3],
+         ["Some trainers do, some don't.",2],
+         ["No. If you can't see it, you miss it.",1],
+         ["Don't know",null]],
+      demand:"To follow this course, a learner must be able to see the screen.",
+      fix:"Brief trainers to say out loud what is on screen — the chart, the arrow, the colour. Send slides and notes before the session, not after.",
+      div:"Also helps: anyone at the back of the room, anyone on a phone, anyone who wants to revise later." },
+
+    { d:"sen", q:"Your videos and recordings — captions or transcript?",
+      o:[["Yes, captioned.",3],
+         ["Some have, some don't.",2],
+         ["No.",1],
+         ["Don't know, or we don't use video",null]],
+      demand:"To follow the video content, a learner must be able to hear it.",
+      fix:"Auto-caption in Zoom, Teams or YouTube, then spend ten minutes fixing the technical terms it gets wrong. That is the whole job.",
+      div:"Also helps: learners watching on public transport, learners weaker in English, anyone who wants to search the content." },
+
+    { d:"com", q:"Learners have to speak in this course — presentations, role-play, oral questioning. Is speaking part of the skill you certify?",
+      o:[["Where it is, yes. Elsewhere a learner can answer in writing.",3],
+         ["We have never separated the two.",2],
+         ["Speaking is required throughout, either way.",1],
+         ["Don't know",null]],
+      demand:"To pass this course, a learner must speak in front of others.",
+      fix:"Go through the lesson plan and mark every point where a learner must speak. For each, ask: is speaking the skill on the certificate, or just how we check? Where it is not, accept written or one-to-one.",
+      div:"Also helps: quieter learners, learners not confident in English, anyone who thinks better in writing." },
+
+    { d:"com", q:"Written tasks with a time limit — is writing fast part of the skill?",
+      o:[["No, and extra time is available to anyone who needs it.",3],
+         ["Only if a learner asks, and we approve it.",2],
+         ["Same time limit for everyone.",1],
+         ["Don't know",null]],
+      demand:"To pass, a learner must write at a certain speed.",
+      fix:"Where speed is not on the certificate, give the extra time to everyone by default. On-request means a learner has to ask first — and most never will.",
+      div:"Also helps: learners writing in a second language, older learners, anyone who checks their work." },
+
+    { d:"com", q:"Your handouts and notes — is the English harder than the skill you are teaching?",
+      o:[["No, we keep it plain and we check.",3],
+         ["Never checked.",2],
+         ["Probably. Materials come from the SME as-is.",1],
+         ["Don't know",null]],
+      demand:"To learn the skill, a learner must first get past the reading level of the materials.",
+      fix:"Read one handout against the learning outcome. Cut the sentences in half. Define each piece of jargon once, on first use.",
+      div:"Also helps: every learner who is tired, rushed, or reading on a phone at 11pm." },
+
+    { d:"cog", q:"If a learner misses something in class, can they get it again — recording, notes, repeat access?",
+      o:[["Yes, standard for everyone.",3],
+         ["On request.",2],
+         ["No. The class is the only chance.",1],
+         ["Don't know",null]],
+      demand:"To keep up, a learner must take it in the first time, at the trainer's pace.",
+      fix:"Record the session, or issue proper notes to everyone. Make it standard, not something a learner has to ask for.",
+      div:"Also helps: shift workers, caregivers who had a bad night, anyone revising before assessment." },
+
+    { d:"cog", q:"Multi-step instructions — spoken once, or written down where a learner can check back?",
+      o:[["Written, always.",3],
+         ["Depends on the trainer.",2],
+         ["Spoken. Learners are expected to keep up.",1],
+         ["Don't know",null]],
+      demand:"To do the activity, a learner must hold several steps in memory after hearing them once.",
+      fix:"Put the steps on a slide or handout that stays visible for the whole activity. Costs nothing.",
+      div:"Also helps: the entire room. This is the single cheapest change in this list." },
+
+    { d:"cog", q:"Timed tasks — is speed part of the skill, or just how you run it?",
+      o:[["Where speed is not the skill, we have taken the clock off.",3],
+         ["Never looked at it that way.",2],
+         ["Everything is timed. That is how it has always been.",1],
+         ["Don't know",null]],
+      demand:"To pass, a learner must work at pace — whether or not pace is the competency.",
+      fix:"List the timed tasks. For each, ask whether the certificate attests to doing it quickly. If not, the clock is a habit, not a standard.",
+      div:"Also helps: anyone who is careful rather than fast — often your best learners." },
+
+    { d:"dig", q:"Before any learning starts, a learner must use your LMS or portal — log in, find materials, upload files. Is using the system part of the course?",
+      o:[["No, and we help learners who struggle, or offer another way.",3],
+         ["No, but they have to manage it themselves.",2],
+         ["We have never separated the system from the content.",1],
+         ["Don't know",null]],
+      demand:"To reach the learning, a learner must first navigate your platform.",
+      fix:"Write a one-page walkthrough with screenshots. Offer one alternative route — email submission, or a phone call to admin.",
+      div:"Also helps: older learners, learners returning to study, anyone who has never used your LMS before." },
+
+    { d:"dig", q:"Do your materials work with screen readers, zoom, or keyboard-only navigation?",
+      o:[["Yes, we have checked.",3],
+         ["Some do.",2],
+         ["No.",1],
+         ["Don't know",null]],
+      demand:"To use the materials, a learner must be able to use them the way they were built.",
+      fix:"Do a five-minute check: tab through a page without a mouse, zoom to 200%, and try to select the text in a PDF. If any of that fails, you have your answer.",
+      div:"Also helps: anyone on a small screen, anyone with a broken trackpad, anyone who wants to copy your text into notes." },
+
+    { d:"phy", q:"Where a learner must handle equipment or move around — is the physical handling the skill, or just how you test it?",
+      o:[["We have separated the two. Where it is just the test method, there is another way.",3],
+         ["Never asked the question.",2],
+         ["Physical handling is required as-is.",1],
+         ["Don't know, or not applicable",null]],
+      demand:"To demonstrate competence, a learner must physically perform in one specific way.",
+      fix:"Where safe operation of the equipment IS the certification, it stays — always. Where the handling is just how you happen to check understanding, look for another way to show the same thing.",
+      div:"Also helps: learners with injuries, older learners, anyone working with an adapted tool." },
+
+    { d:"soc", q:"Group work and discussion — is working in a group the skill, or your teaching method?",
+      o:[["Where it is the method, learners can contribute another way — written, one-to-one, after class.",3],
+         ["We have never separated the two.",2],
+         ["Everyone joins the group work. That is the course.",1],
+         ["Don't know",null]],
+      demand:"To participate, a learner must interact with strangers in real time.",
+      fix:"Keep group work where teamwork is on the certificate. Everywhere else, add a second route in: a written contribution, a pair instead of a group, or a comment after the session.",
+      div:"Also helps: introverts, learners new to the industry, anyone who needs a minute to think before speaking." },
+
+    { d:"soc", q:"A learner who says nothing in class — how do you read that?",
+      o:[["We judge contribution only where it is assessed, against a stated criterion.",3],
+         ["Usually taken as not engaged.",2],
+         ["We don't really track it.",1],
+         ["Don't know",null]],
+      demand:"To be seen as engaged, a learner must speak up.",
+      fix:"If participation is assessed, write down what it is assessed against and tell learners. If it is not assessed, stop reading silence as disengagement — it is the one judgement with no evidence behind it.",
+      div:"Also helps: every learner who is processing rather than performing." },
+
+    { d:"env", q:"Session length, breaks, venue, travel — has anyone looked at what it takes just to get through the day?",
+      o:[["Yes, and there is flexibility in breaks, pacing or attendance.",3],
+         ["We would accommodate if someone asks.",2],
+         ["The schedule is the schedule.",1],
+         ["Don't know",null]],
+      demand:"To complete the course, a learner must sustain a full day in your room, on your schedule.",
+      fix:"Publish the real schedule up front — session length, break times, venue access. Then let learners step out without it counting against them.",
+      div:"Also helps: caregivers, learners with long commutes, anyone managing a health condition, anyone who is simply tired." },
+
+    { d:"env", q:"Registration, payment, forms — more than one way to do it if the normal way is hard?",
+      o:[["Yes, and we say so up front.",3],
+         ["One way, but staff will help if contacted.",2],
+         ["One way only.",1],
+         ["Don't know",null]],
+      demand:"To enrol at all, a learner must complete your forms in your format.",
+      fix:"Add one alternative route — phone or email — and say so on the course page, next to the fee. A route nobody knows about does not exist.",
+      div:"Also helps: anyone without a printer, anyone paying for someone else, anyone who hit a wall in your form." }
+  ];
+
+  const CTX = [
+    { k:"role", q:"Your role in the training function",
+      o:["Adult Educator / trainer","Courseware developer","Administrator","Manager or leader"] },
+    { k:"power", q:"If you decided next month to change how this course runs, could you?",
+      o:["Yes, that's my call","I'd need approval, but it's gettable","Not realistically"] },
+    { k:"owner", q:"Who looks after inclusive practice in your training function?",
+      o:["A named owner, inside training","It sits elsewhere (e.g. HR)","No one, really"] }
+  ];
+
+  const STAGES = {
+    unexamined:{
+      name:"Unexamined",
+      body:"Nobody has written down what this course asks of a learner. That is normal — almost no course has. But it means the demands are invisible, and invisible demands never get flexed. Right now, who gets through this course depends partly on who happens to fit it."
+    },
+    goodwill:{
+      name:"Goodwill",
+      body:"This course works — when the right trainer is in the room. The flexibility is real, but it is carried by people, not by the design. When the schedule tightens or the trainer changes, it leaves with them. And a learner has to ask first, which most never do."
+    },
+    deliberate:{
+      name:"Deliberate",
+      body:"The big demands have been named, and alternatives exist for several. What is left below is doing quiet damage — and for each one, the question is whether it is the skill you certify, or simply how the course has always run."
+    },
+    designed:{
+      name:"Designed in",
+      body:"Rare. This course keeps what is essential and offers a route around the rest. The work from here is depth: the demands you still cannot see, and whether learners agree with your answers."
+    }
+  };
+
+  /* ---------------- state ---------------- */
+  const A = new Array(Q.length).fill(undefined); // index into options
+  const C = {};
+  let i = 0;
+  let courseName = "";
+
+  const $ = id => document.getElementById(id);
+  const show = id => { ["s-intro","s-quiz","s-context","s-results"].forEach(s=>$(s).classList.add("hidden")); $(id).classList.remove("hidden"); };
+
+  /* ---------------- quiz ---------------- */
+  function renderQ(){
+    const q = Q[i];
+    $("domain").textContent = DOMAINS[q.d];
+    $("counter").textContent = (i+1) + " of " + Q.length;
+    $("bar").style.width = ((i)/Q.length*100) + "%";
+
+    let html = '<fieldset class="fade"><legend id="qlegend" tabindex="-1">' + q.q + '</legend>';
+    q.o.forEach((o,oi)=>{
+      const dk = o[1]===null ? " dk" : "";
+      const ck = A[i]===oi ? " checked" : "";
+      html += '<label class="opt'+dk+'"><input type="radio" name="q'+i+'" value="'+oi+'"'+ck+'><span>'+o[0]+'</span></label>';
+    });
+    html += '</fieldset>';
+    $("qbox").innerHTML = html;
+
+    $("qbox").querySelectorAll('input[type=radio]').forEach(r=>{
+      r.addEventListener("change", ()=>{
+        A[i] = parseInt(r.value,10);
+        $("next").disabled = false;
+      });
+    });
+
+    $("next").disabled = A[i]===undefined;
+    $("back").disabled = i===0;
+    $("next").textContent = (i===Q.length-1) ? "Finish →" : "Next →";
+    $("qlegend").focus();
+  }
+
+  $("start").addEventListener("click", ()=>{
+    courseName = $("course").value.trim();
+    show("s-quiz"); i=0; renderQ();
+  });
+  $("next").addEventListener("click", ()=>{
+    if(A[i]===undefined) return;
+    if(i < Q.length-1){ i++; renderQ(); }
+    else { $("bar").style.width="100%"; renderContext(); show("s-context"); }
+  });
+  $("back").addEventListener("click", ()=>{ if(i>0){ i--; renderQ(); } });
+
+  /* ---------------- context ---------------- */
+  function renderContext(){
+    let html = "";
+    CTX.forEach((c,ci)=>{
+      html += '<fieldset style="margin-bottom:26px"><legend style="font-size:18px;margin-bottom:12px">'+c.q+'</legend>';
+      c.o.forEach((o,oi)=>{
+        html += '<label class="opt"><input type="radio" name="c'+ci+'" value="'+oi+'"><span>'+o+'</span></label>';
+      });
+      html += '</fieldset>';
+    });
+    $("cbox").innerHTML = html;
+    $("cbox").querySelectorAll('input[type=radio]').forEach(r=>{
+      r.addEventListener("change", ()=>{
+        const ci = parseInt(r.name.slice(1),10);
+        C[CTX[ci].k] = CTX[ci].o[parseInt(r.value,10)];
+      });
+    });
+  }
+  $("toresults").addEventListener("click", ()=>{ renderResults(); show("s-results"); window.scrollTo(0,0); });
+
+  /* ---------------- scoring ---------------- */
+  function analyse(){
+    let sum=0, n=0, fixed=0, depends=0, designed=0, dk=0;
+    const fixedItems=[], dkItems=[];
+    Q.forEach((q,qi)=>{
+      const oi = A[qi];
+      if(oi===undefined){ dk++; dkItems.push(qi); return; }
+      const s = q.o[oi][1];
+      if(s===null){ dk++; dkItems.push(qi); return; }
+      sum+=s; n++;
+      if(s===1){ fixed++; fixedItems.push(qi); }
+      else if(s===2){ depends++; }
+      else { designed++; }
+    });
+    const avg = n ? sum/n : 0;
+    let key;
+    if(dk >= 7 || avg < 1.7) key="unexamined";
+    else if(avg < 2.2) key="goodwill";
+    else if(avg < 2.7) key="deliberate";
+    else key="designed";
+
+    // priority demands: fixed first, then depends, then don't-knows
+    let priority = fixedItems.slice();
+    if(priority.length < 3){
+      Q.forEach((q,qi)=>{
+        if(priority.length>=3) return;
+        const oi=A[qi];
+        if(oi!==undefined && q.o[oi][1]===2 && priority.indexOf(qi)<0) priority.push(qi);
+      });
+    }
+    if(priority.length < 3){
+      dkItems.forEach(qi=>{ if(priority.length<3 && priority.indexOf(qi)<0) priority.push(qi); });
+    }
+    priority = priority.slice(0,3);
+
+    return { avg, fixed, depends, designed, dk, key, stage:STAGES[key], priority, fixedItems, dkItems };
+  }
+
+  function esc(s){ return String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+
+  /* ---------------- results ---------------- */
+  function renderResults(){
+    const r = analyse();
+    const cn = courseName ? esc(courseName) : "this course";
+
+    let h = '<div class="fade" style="padding-top:26px">';
+    h += '<p class="eyebrow">Your result</p>';
+    h += '<div class="stagecard"><p class="eyebrow">'+cn+' is at</p>';
+    h += '<div class="stagename">'+r.stage.name+'</div><p>'+r.stage.body+'</p></div>';
+
+    h += '<div class="counts">';
+    h += '<div class="count"><b>'+r.fixed+'</b><span>fixed demands — one way only, no alternative</span></div>';
+    h += '<div class="count"><b>'+r.depends+'</b><span>demands flexed only if someone asks, or if the right trainer is in</span></div>';
+    h += '<div class="count warn"><b>'+r.dk+'</b><span>things you could not answer about your own course</span></div>';
+    h += '</div>';
+
+    if(r.dk > 0){
+      h += '<p class="note" style="margin:14px 0 0">Those '+r.dk+' are not a gap in your practice. They are a gap in what the course currently makes visible — and they are usually the fastest thing to fix.</p>';
+    }
+
+    h += '<div class="lens"><p><strong>The only question that matters, for every demand below:</strong> is this the skill you certify — or is it just how the course happens to run? Keep the first. The second is where learners are being lost for no reason.</p></div>';
+
+    h += '<h2 style="margin-top:36px">Start here</h2>';
+    r.priority.forEach(qi=>{
+      const q = Q[qi];
+      const oi = A[qi];
+      const known = oi!==undefined && q.o[oi][1]!==null;
+      h += '<div class="demand">';
+      h += '<h3>'+DOMAINS[q.d]+(known?'':' · not visible')+'</h3>';
+      h += '<p class="d-title">'+q.demand+'</p>';
+      h += '<p class="d-do"><b>What to do:</b> '+q.fix+'</p>';
+      h += '<p class="d-div">'+q.div+'</p>';
+      h += '</div>';
+    });
+
+    h += '<div class="btnrow" style="margin-top:30px">';
+    h += '<button class="btn" id="dl">Download my report</button>';
+    h += '<button class="btn ghost" id="pr">Print / save as PDF</button>';
+    h += '<button class="btn ghost" id="again">Start again</button>';
+    h += '</div>';
+
+    h += '<div class="cta"><h2>The report is the map. The work is the route.</h2>';
+    h += '<p>Most providers find the same thing: the fixed demands are not the skill they certify. Knowing that is the easy part — deciding what to change first, and what to leave alone, is the work. InclusionEdge does that with you, course by course.</p>';
+    h += '<div class="row"><input type="email" id="mail" placeholder="Work email" aria-label="Work email">';
+    h += '<button class="btn" id="send">Talk it through</button></div>';
+    h += '<p id="sent" class="hidden" style="margin:14px 0 0;color:#9EDDD9;font-weight:700"></p></div>';
+
+    h += '</div>';
+    $("results").innerHTML = h;
+
+    $("dl").addEventListener("click", ()=>downloadReport(r));
+    $("pr").addEventListener("click", ()=>window.print());
+    $("again").addEventListener("click", ()=>{ location.reload(); });
+    $("send").addEventListener("click", ()=>{
+      const m = $("mail").value.trim();
+      if(m.indexOf("@")<0){ $("mail").focus(); return; }
+      $("sent").textContent = "Thanks — we will be in touch. (Prototype: connect this to your CRM or form endpoint.)";
+      $("sent").classList.remove("hidden");
+    });
+  }
+
+  /* ---------------- report ---------------- */
+  function downloadReport(r){
+    const cn = courseName || "Unnamed course";
+    const date = new Date().toLocaleDateString("en-SG",{day:"numeric",month:"long",year:"numeric"});
+
+    let rows = "";
+    Q.forEach((q,qi)=>{
+      const oi = A[qi];
+      const ans = (oi===undefined) ? "Not answered" : q.o[oi][0];
+      const s = (oi===undefined||q.o[oi][1]===null) ? "Not visible" : (q.o[oi][1]===1?"Fixed":q.o[oi][1]===2?"Depends":"Designed in");
+      rows += '<tr><td class="dm">'+DOMAINS[q.d]+'</td><td>'+esc(q.q)+'</td><td>'+esc(ans)+'</td><td class="st '+s.replace(/\s/g,'').toLowerCase()+'">'+s+'</td></tr>';
+    });
+
+    let recs = "";
+    const order = r.fixedItems.concat(r.dkItems).filter((v,idx,self)=>self.indexOf(v)===idx);
+    (order.length?order:Q.map((_,x)=>x)).forEach((qi,n)=>{
+      const q = Q[qi];
+      recs += '<div class="rec"><h4>'+(n+1)+'. '+DOMAINS[q.d]+'</h4>';
+      recs += '<p class="dem"><strong>The demand:</strong> '+esc(q.demand)+'</p>';
+      recs += '<p><strong>What to do:</strong> '+esc(q.fix)+'</p>';
+      recs += '<p class="div"><strong>Who else this helps:</strong> '+esc(q.div)+'</p></div>';
+    });
+
+    const ctx = Object.keys(C).length
+      ? '<p><strong>Answered by:</strong> '+esc(C.role||"—")+' · <strong>Can change the course:</strong> '+esc(C.power||"—")+' · <strong>Inclusive practice owner:</strong> '+esc(C.owner||"—")+'</p>'
+      : '';
+
+    const html = `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<title>Inclusive Training Practices — ${esc(cn)}</title>
+<style>
+ body{font-family:Georgia,'Times New Roman',serif;color:#102B3C;max-width:820px;margin:40px auto;padding:0 24px;line-height:1.55}
+ h1{font-size:27px;margin:0 0 6px;line-height:1.2}
+ h2{font-size:19px;margin:34px 0 12px;border-bottom:2px solid #0F7B78;padding-bottom:6px}
+ h4{font-size:14px;margin:0 0 6px;color:#0A5654;text-transform:uppercase;letter-spacing:.08em}
+ .meta{color:#5A7280;font-size:13px;font-family:Arial,sans-serif;margin-bottom:26px}
+ .stage{background:#102B3C;color:#fff;padding:22px 24px;border-radius:8px;margin:20px 0}
+ .stage .n{font-size:30px;font-weight:bold;font-family:Arial,sans-serif;margin-bottom:8px}
+ .stage p{margin:0;color:#C6D8D8;font-size:15px}
+ .nums{display:flex;gap:14px;margin:18px 0;font-family:Arial,sans-serif}
+ .nums div{flex:1;border:1px solid #C9DADA;border-radius:6px;padding:14px}
+ .nums b{display:block;font-size:26px;color:#0A5654}
+ .nums span{font-size:12px;color:#5A7280}
+ .lens{background:#FBF2E2;border:1px solid #E7CF9E;padding:16px 18px;border-radius:6px;font-size:15px}
+ table{width:100%;border-collapse:collapse;font-family:Arial,sans-serif;font-size:12.5px;margin-top:10px}
+ th{text-align:left;background:#EFF4F4;padding:8px;border-bottom:2px solid #C9DADA;font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+ td{padding:8px;border-bottom:1px solid #E4EBEB;vertical-align:top}
+ td.dm{color:#5A7280;white-space:nowrap}
+ td.st{font-weight:bold;white-space:nowrap}
+ td.st.fixed{color:#B4552D} td.st.depends{color:#8A5A12} td.st.designedin{color:#0A5654} td.st.notvisible{color:#5A7280}
+ .rec{border-left:4px solid #C9862B;padding:2px 0 2px 16px;margin:20px 0}
+ .rec p{margin:6px 0;font-size:14.5px}
+ .rec .div{color:#0A5654;font-size:13.5px}
+ .foot{margin-top:40px;padding-top:14px;border-top:1px solid #C9DADA;font-size:12px;color:#5A7280;font-family:Arial,sans-serif}
+ @media print{body{margin:0}.rec{page-break-inside:avoid}}
+</style></head><body>
+<h1>Inclusive Training Practices — Self-Check Report</h1>
+<div class="meta"><strong>Course:</strong> ${esc(cn)} &nbsp;·&nbsp; <strong>Date:</strong> ${date} &nbsp;·&nbsp; InclusionEdge</div>
+${ctx}
+<div class="stage"><div class="n">${r.stage.name}</div><p>${r.stage.body}</p></div>
+<div class="nums">
+ <div><b>${r.fixed}</b><span>Fixed demands — one way only</span></div>
+ <div><b>${r.depends}</b><span>Flexed only on request</span></div>
+ <div><b>${r.dk}</b><span>Not visible to you yet</span></div>
+</div>
+<div class="lens"><strong>The lens:</strong> for every demand in this report, ask one question — is this the skill the certificate attests to, or is it just how the course happens to be run? What is essential stays, always. What is incidental is where learners are lost for no reason.</div>
+
+<h2>What to do first</h2>
+${recs}
+
+<h2>Your answers in full</h2>
+<table><thead><tr><th>Domain</th><th>Question</th><th>Your answer</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table>
+
+<div class="foot">This is a self-check, not an audit, an accreditation or a grade. It reflects one course, as described by the person who completed it. Nothing here lowers any standard: every certification continues to attest to the same competency.<br><br>InclusionEdge — where intent meets lived reality.</div>
+</body></html>`;
+
+    const blob = new Blob([html], {type:"text/html"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "inclusive-training-report-" + cn.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40) + ".html";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(url), 2000);
+  }
+
+})();
+</script>
+</body>
+</html>
